@@ -16,13 +16,7 @@ function _gocomplete() {
 	case $subcmd in
 		build|install|test)
 			# List directories with ls -d $input*/ , while ignoring stderr output
-			# Strip trailing slashes from the directory names
-			COMPREPLY=($(cd $GOPATH/src && ls -d $2*/ 2>/dev/null | sed 's#/$##g'))
-			
-			# If there is only match, jump right into the completions for that one.
-			if [[ ${#COMPREPLY[@]} == 1 ]]; then
-				COMPREPLY=($(cd $GOPATH/src && ls -d ${COMPREPLY[0]}/*/ 2>/dev/null | sed 's#/$##g'))
-			fi
+			COMPREPLY=($(cd $GOPATH/src && ls -d $2*/ 2>/dev/null))
 			return 0
 			;;
 	esac
